@@ -13,10 +13,13 @@ export const initDB = () => {
     );
   `);
 };
+export const addTask = (title: string, desc: string, date: string) => {
+  return db.runSync('INSERT INTO tasks (title, description, date) VALUES (?, ?, ?)', [title, desc, date]);
+};
 
-export const getTasks = () => db.getAllSync('SELECT * FROM tasks');
-export const addTask = (title: string, desc: string, date: string) => 
-  db.runSync('INSERT INTO tasks (title, description, date) VALUES (?, ?, ?)', [title, desc, date]);
+export const getTasks = () => {
+  return db.getAllSync('SELECT * FROM tasks');
+};
 export const deleteTask = (id: number) => db.runSync('DELETE FROM tasks WHERE id = ?', [id]);
 
 export const getTaskById = (id: number) => 
